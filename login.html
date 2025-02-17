@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Workwise | Login</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background-color: #f8f8f8;
+      }
+      header, footer {
+        background: #fff;
+        padding: 1rem 2rem;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo img {
+        height: 40px;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1.5rem;
+      }
+      nav a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+      }
+      .login-container {
+        max-width: 400px;
+        margin: 3rem auto;
+        background: #fff;
+        padding: 2rem;
+        border-radius: 6px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      }
+      .login-container h1 {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      label {
+        font-weight: 500;
+      }
+      input {
+        padding: 0.8rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+      button {
+        align-self: center;
+        padding: 0.7rem 1.2rem;
+        border: none;
+        background: #FFC107;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      button:hover {
+        background: #FFA000;
+      }
+      .alternative-login {
+        text-align: center;
+        margin-top: 1rem;
+      }
+      footer {
+        background: #333;
+        color: #ccc;
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 2rem;
+      }
+      footer a {
+        color: #ccc;
+        text-decoration: none;
+        margin: 0 0.5rem;
+      }
+      footer a:hover {
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a href="index.html"><img src="https://via.placeholder.com/160x40.png?text=Workwise" alt="Workwise Logo" /></a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="for-vendors.html">For Vendors</a></li>
+          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="contact-us.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="login-container">
+      <h1>Login</h1>
+      <form onsubmit="return handleLogin(event)">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" required />
+
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" required />
+
+        <div style="text-align:right; margin-bottom:1rem;">
+          <a href="#" style="font-size:0.85rem;">Forgot Password?</a>
+        </div>
+
+        <button type="submit">Login</button>
+      </form>
+      <div class="alternative-login">
+        <p>OR</p>
+        <button style="background:#DB4437" onclick="googleSignIn()">
+          Login with Google
+        </button>
+        <p style="margin-top:1rem;font-size:0.9rem;">
+          Are you a new user?
+          <a href="register.html" style="text-decoration:none;color:#FF8C00;">Register here</a>
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2024 Workwise</p>
+      <div>
+        <a href="#">Privacy Policy</a> |
+        <a href="#">Terms of Use</a> |
+        <a href="https://www.linkedin.com/company/workwise11/" target="_blank">LinkedIn</a>
+      </div>
+    </footer>
+
+    <script>
+      function handleLogin(e) {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+        // Example - handle the login logic
+        console.log("Login Attempt:", { email, password });
+        alert("Login successful (demo)!");
+        e.target.reset();
+      }
+      function googleSignIn() {
+        alert("Google Sign-In (demo)!");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Workwise | For Vendors</title>
+    
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- Font Awesome (for AI icon) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-..."
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      /* 
+        ========================
+        GLOBAL / REUSABLE STYLES
+        (Same as in index.html)
+        ========================
+      */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --text-black: #000;          /* Pure black for texts */
+        --brand-accent: #f5811e;     /* Orange accent color */
+        --brand-blue: #1E2A78;       /* Dark blue, used for Register, AI button, etc. */
+      }
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #fff;
+        color: var(--text-black); /* Use pure black for text */
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+      }
+
+      /*
+        ===========================
+        HEADER & NAVIGATION
+        ===========================
+      */
+      header {
+        width: 100%;
+        background-color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.8rem 1rem;
+      }
+      .logo img {
+        width: 140px; /* adjust as needed */
+        height: auto;
+      }
+      nav ul {
+        display: flex;
+        gap: 1.5rem;
+      }
+      nav li {
+        position: relative;
+      }
+      nav a {
+        font-weight: 500;
+        color: var(--text-black);
+        transition: color 0.3s, text-decoration 0.3s;
+      }
+      nav a:hover {
+        color: #feca57; /* hover yellow */
+        text-decoration: underline;
+      }
+      .auth-buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+      /* Login button (orange) */
+      .btn-login {
+        background: var(--brand-accent);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s;
+      }
+      .btn-login:hover {
+        background: #e56a0f;
+      }
+      /* Register button (dark blue) */
+      .btn-register {
+        background: var(--brand-blue);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s;
+      }
+      .btn-register:hover {
+        background: #111f5b;
+      }
+
+      /*
+        =========================
+        BREADCRUMB / PAGE BANNER
+        =========================
+      */
+            .page-banner {
+        width: 100%;
+        background: url("https://api.letsworkwise.com/banner_image/1723181257132-3773bd09-2a7d-489a-981b-f11e94c2a55a.png") center/cover no-repeat;
+        min-height: 240px;
+        position: relative;
+      }
+      .page-banner::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        right: 0; bottom: 0;
+        background: rgba(0,0,0,0.4);
+      }
+      .banner-content {
+        position: relative;
+        z-index: 1;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1.5rem;
+        color: #fff;
+      }
+      .breadcrumb {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        color: #fff;
+      }
+      .breadcrumb a {
+        color: #feca57; /* keep breadcrumb links in a slight highlight */
+      }
+      .banner-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-top: 1rem;
+      }
+
+      /* 
+        ===============================
+        KEY BENEFITS / INTRO SECTION
+        ===============================
+      */
+      .vendors-intro-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        padding: 3rem 1rem;
+      }
+      .vendors-intro-text {
+        flex: 1 1 500px;
+      }
+      .vendors-intro-text h2 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+      .vendors-intro-text p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+      .vendor-benefit-list {
+        margin-top: 1rem;
+      }
+      .vendor-benefit-list li {
+        margin-bottom: 0.8rem;
+        font-size: 1rem;
+      }
+      .vendors-intro-image {
+        flex: 1 1 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .vendors-intro-image img {
+        width: 100%;
+        height: auto;
+        max-width: 400px;
+        border-radius: 6px;
+      }
+
+      /*
+        =====================
+        DARK SERVICES SECTION
+        =====================
+      */
+      .vendor-services-section {
+        background: var(--brand-blue);
+        padding: 3rem 1rem;
+      }
+      .vendor-services-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .vendor-services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+      .service-box {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: left;
+        color: #fff;
+      }
+      .service-box h3 {
+        color: #fff;
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+      }
+      .service-box p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+      .service-box ul {
+        margin-top: 0.5rem;
+      }
+      .service-box li {
+        margin: 0.3rem 0;
+      }
+      .section-title-light {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #fff;
+      }
+
+      /*
+        ==================
+        WHY WORKWISE?
+        ==================
+      */
+      .why-workwise-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+      .why-workwise-image {
+        flex: 1 1 500px;
+      }
+      .why-workwise-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+      }
+      .why-workwise-text {
+        flex: 1 1 400px;
+      }
+      .why-workwise-text h2 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+      .why-workwise-text ul {
+        margin-top: 1rem;
+      }
+      .why-workwise-text li {
+        margin-bottom: 0.8rem;
+        font-size: 1rem;
+      }
+
+      /*
+        ==================
+        TESTIMONIALS
+        ==================
+      */
+      .testimonials-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 1rem;
+      }
+      .testimonials-section h2 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+      }
+      .testimonial-card {
+        background: #f9f9f9;
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      }
+      .testimonial-card p {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+      }
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      .author-info {
+        display: flex;
+        flex-direction: column;
+      }
+      .author-name {
+        font-weight: 600;
+      }
+      .author-designation {
+        font-size: 0.9rem;
+        color: #555;
+      }
+      .testimonial-arrows {
+        text-align: center;
+        margin-top: 1rem;
+      }
+      .testimonial-arrow-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+        margin: 0 0.5rem;
+        color: var(--brand-accent);
+      }
+      .testimonial-arrow-btn:hover {
+        color: #e56a0f;
+      }
+
+      /*
+        ==================
+        FOOTER SECTION
+        ==================
+      */
+      footer {
+        background: #fff;
+        border-top: 1px solid #eee;
+        padding: 1.5rem 1rem;
+      }
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .footer-container p {
+        color: #999;
+        font-size: 0.9rem;
+      }
+      .footer-links a {
+        margin: 0 0.5rem;
+        color: #999;
+        font-size: 0.9rem;
+      }
+      .footer-links a:hover {
+        color: var(--brand-blue);
+      }
+
+      /*
+        =======================================
+        BOTTOM-RIGHT BUTTON TO AI.html (with icon)
+        =======================================
+      */
+      /* Use dark blue for AI button */
+      .ai-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--brand-blue);
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        padding: 0.8rem 1.4rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        z-index: 999;
+        transition: background 0.3s;
+      }
+      .ai-btn i {
+        margin-right: 6px;
+      }
+      .ai-btn:hover {
+        background: #111f5b;
+      }
+
+      /*
+        ==================
+        MODAL STYLES
+        ==================
+      */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.55);
+        display: none; /* Hidden by default */
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+      .modal {
+        background: #fff;
+        color: #000;
+        width: 95%;
+        max-width: 450px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        position: relative;
+      }
+      .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        background: transparent;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        color: #999;
+      }
+      .modal-heading {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 1rem 0 0.5rem;
+      }
+      .modal-body {
+        padding: 1.5rem;
+      }
+      .modal-body label {
+        display: block;
+        margin: 0.8rem 0 0.4rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #000;
+      }
+      .modal-body input {
+        width: 100%;
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+      .forgot-password {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 1rem;
+        text-align: right;
+      }
+      .modal-footer-btn {
+        display: block;
+        width: 100%;
+        background: var(--brand-accent);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.6rem 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 0.95rem;
+        margin-top: 0.5rem;
+        text-align: center;
+      }
+      .modal-footer-btn:hover {
+        background: #e56a0f;
+      }
+      .or-separator {
+        text-align: center;
+        margin: 1rem 0;
+        font-size: 0.9rem;
+        color: #666;
+      }
+      .btn-google {
+        display: inline-block;
+        background: #db4437;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      .new-user-text {
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+      }
+      .new-user-text a {
+        color: var(--brand-accent);
+        font-weight: 600;
+        margin-left: 0.3rem;
+        text-decoration: none;
+      }
+      .new-user-text a:hover {
+        text-decoration: underline;
+      }
+      .register-mode label,
+      .register-mode select {
+        display: block;
+      }
+      .register-mode select {
+        width: 100%;
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <!-- HEADER -->
+    <header>
+      <div class="header-container">
+        <div class="logo">
+          <a href="index.html">
+            <!-- Replace with your actual logo path -->
+            <img src="logo.png" alt="Workwise Logo" />
+          </a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="for-vendors.html" style="color: var(--brand-accent);">For Vendors</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="contact-us.html">Contact Us</a></li>
+          </ul>
+        </nav>
+        <div class="auth-buttons">
+          <button class="btn-login" onclick="openModal('login')">Login</button>
+          <button class="btn-register" onclick="openModal('register')">Register</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- PAGE BANNER / BREADCRUMB -->
+    <section class="page-banner">
+      <div class="banner-content">
+        <div class="breadcrumb">
+          <a href="index.html">Home</a> / For Vendors
+        </div>
+        <h1 class="banner-title">For Vendors</h1>
+      </div>
+    </section>
+
+    <!-- KEY BENEFITS / INTRO SECTION -->
+    <section class="vendors-intro-section">
+      <div class="vendors-intro-text">
+        <h2>Key Benefits for Vendors</h2>
+        <p>
+          Unlock Your Business Potential with Workwise. Access high-quality leads 
+          and exclusive contracts with top companies like ONGC and IOCL.
+        </p>
+        <ul class="vendor-benefit-list">
+          <li><strong>Premium Opportunities</strong><br/>
+              Land exclusive contracts with top clients in the industry.</li>
+          <li><strong>Effortless Quoting &amp; Communication</strong><br/>
+              Submit quotes quickly and receive instant WhatsApp alerts.</li>
+          <li><strong>Dedicated Vendor Success Manager</strong><br/>
+              Enjoy personalised support to ensure smooth operations.</li>
+        </ul>
+      </div>
+      <div class="vendors-intro-image">
+        <!-- Replace with your own stock photo or relevant image -->
+        <img src="modern-office.jpg" alt="Laptop with plant" />
+      </div>
+    </section>
+
+    <!-- DARK BACKGROUND SERVICES SECTION -->
+    <section class="vendor-services-section">
+      <div class="vendor-services-content">
+        <h2 class="section-title-light">Explore Our Vendor Services</h2>
+        <div class="vendor-services-grid">
+          <div class="service-box">
+            <h3>Exclusive Contracts</h3>
+            <p>Target high-value government and industrial projects.</p>
+            <ul>
+              <li>High-quality leads</li>
+              <li>Connect with serious buyers</li>
+            </ul>
+          </div>
+          <div class="service-box">
+            <h3>Effortless Quoting & Communication</h3>
+            <p>Stay informed with real-time alerts for your quotes.</p>
+            <ul>
+              <li>Instant notifications</li>
+              <li>Quick quote submission</li>
+            </ul>
+          </div>
+          <div class="service-box">
+            <h3>Dedicated Vendor Success Manager</h3>
+            <p>Get tailored assistance for all platform-related needs.</p>
+            <ul>
+              <li>Concierge Service</li>
+              <li>Personalized support</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY WORKWISE? -->
+    <section class="why-workwise-section">
+      <div class="why-workwise-image">
+        <!-- Replace with your own relevant image -->
+        <img src="industry-building.jpg" alt="Industrial building" />
+      </div>
+      <div class="why-workwise-text">
+        <h2>Why Workwise?</h2>
+        <ul>
+          <li><strong>Tailored Financial Flexibility</strong><br/>
+              Set your payment terms to manage cash flow.</li>
+          <li><strong>Constructive Feedback</strong><br/>
+              Improve services with feedback from contractors.</li>
+          <li><strong>Smart Business Tools</strong><br/>
+              Use intuitive dashboards and analytics for better decisions.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section">
+      <h2>What Our Vendors Say About Us</h2>
+      <div class="testimonial-card">
+        <p>
+          “Workwise has truly transformed the way we do business. 
+          As a leading manufacturer of industrial plumbing solutions, 
+          we were struggling to find a reliable platform that could help 
+          us reach the right clients. With Workwise, we’ve gained access 
+          to exclusive contracts and high-quality leads that perfectly 
+          match our expertise. The platform’s ease of use, combined with 
+          the personalized support from our Vendor Success Manager, 
+          has made a significant impact on our growth. We highly recommend 
+          Workwise to any vendor looking to expand their market presence.”
+        </p>
+        <div class="testimonial-author">
+          <div class="author-info">
+            <span class="author-name">Dushyant Trivedi</span>
+            <span class="author-designation">CEO, Fluidline Valves</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-arrows">
+        <button class="testimonial-arrow-btn"><i class="fas fa-chevron-left"></i></button>
+        <button class="testimonial-arrow-btn"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-container">
+        <p>© 2024 Workwise - All Rights Reserved |
+           Digital Partner 
+           <a href="https://www.indusnet.co.in/" target="_blank">Indus Net Technologies</a>
+        </p>
+        <div class="footer-links">
+          <a href="privacypolicy.html">Privacy Policy</a> |
+          <a href="terms-of-use.html">Terms of Use</a> |
+          <a href="https://www.linkedin.com/company/workwise11/" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- AI BUTTON (ICON) -->
+    <button class="ai-btn" onclick="window.location.href='AI.html'">
+      <i class="fas fa-brain"></i> AI
+    </button>
+
+    <!-- MODAL OVERLAY (Login/Register) -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <script>
+      // ======== MODAL LOGIC (same as index.html) ========
+      const overlay = document.getElementById('modalOverlay');
+
+      function openModal(mode) {
+        // mode can be 'login' or 'register'
+        overlay.style.display = 'flex';
+        overlay.innerHTML = generateModalHTML(mode);
+      }
+
+      function closeModal() {
+        overlay.style.display = 'none';
+        overlay.innerHTML = '';
+      }
+
+      function generateModalHTML(mode) {
+        if(mode === 'login') {
+          return `
+            <div class="modal">
+              <button class="close-modal" onclick="closeModal()">&times;</button>
+              <div class="modal-body">
+                <div class="modal-heading">Login</div>
+
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" placeholder="Enter your email" />
+
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter Password" />
+
+                <div class="forgot-password">
+                  <a href="#">Forgot Password?</a>
+                </div>
+
+                <button class="modal-footer-btn" onclick="submitLogin()">Login</button>
+
+                <div class="or-separator">OR</div>
+
+                <button class="btn-google">
+                  <i class="fab fa-google"></i>
+                  Login With Google
+                </button>
+
+                <div class="new-user-text">
+                  Are you a new user?
+                  <a href="#" onclick="openModal('register')">Register here</a>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          // register
+          return `
+            <div class="modal">
+              <button class="close-modal" onclick="closeModal()">&times;</button>
+              <div class="modal-body register-mode">
+                <div class="modal-heading">Register</div>
+
+                <label>Contact Person Name</label>
+                <input type="text" placeholder="e.g. Rahul Patil" />
+
+                <label>Work Email</label>
+                <input type="email" placeholder="you@example.com" />
+
+                <label>Organization Name</label>
+                <input type="text" placeholder="e.g. Workwise Pvt Ltd" />
+
+                <label>Phone No.</label>
+                <input type="tel" placeholder="e.g. 9123456789" />
+
+                <label>Register As</label>
+                <select>
+                  <option value="">--Select--</option>
+                  <option value="buyer">Buyer</option>
+                  <option value="vendor">Vendor</option>
+                </select>
+
+                <button class="modal-footer-btn" onclick="submitRegister()">Register</button>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      function submitLogin() {
+        const email = document.getElementById('loginEmail').value;
+        const pwd = document.getElementById('loginPassword').value;
+        alert("Login Attempt:\nEmail: " + email + "\nPassword: " + pwd);
+        closeModal();
+      }
+
+      function submitRegister() {
+        alert("Registration Attempted (Demo)!");
+        closeModal();
+      }
+    </script>
+
+  </body>
+</html>

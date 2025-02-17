@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Workwise | AI</title>
+    
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- Font Awesome (for icons) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-..."
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      /* 
+        =========================================
+        GLOBAL / REUSABLE STYLES
+        =========================================
+      */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --text-black: #000;         
+        --brand-accent: #f5811e;    
+        --brand-blue: #1E2A78;      
+      }
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #fff;
+        color: var(--text-black);
+        overflow-x: hidden; /* Prevent horizontal scrollbars if any wide animations occur */
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+      }
+
+      /*
+        =========================================
+        HEADER & NAVIGATION (Same as other pages)
+        =========================================
+      */
+      header {
+        width: 100%;
+        background-color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.8rem 1rem;
+      }
+      .logo img {
+        width: 140px;
+        height: auto;
+      }
+      nav ul {
+        display: flex;
+        gap: 1.5rem;
+      }
+      nav li {
+        position: relative;
+      }
+      nav a {
+        font-weight: 500;
+        color: var(--text-black);
+        transition: color 0.3s, text-decoration 0.3s;
+      }
+      nav a:hover {
+        color: #feca57;
+        text-decoration: underline;
+      }
+      .auth-buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+      /* Login button (orange) */
+      .btn-login {
+        background: var(--brand-accent);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s;
+      }
+      .btn-login:hover {
+        background: #e56a0f;
+      }
+      /* Register button (dark blue) */
+      .btn-register {
+        background: var(--brand-blue);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s;
+      }
+      .btn-register:hover {
+        background: #111f5b;
+      }
+
+      /*
+        =========================================
+        AI PAGE MAIN CONTENT (Futuristic, Animated)
+        =========================================
+      */
+
+      /* 
+        1) We create an animated, futuristic gradient background.
+        2) We add some floating or rotating shapes for extra flair.
+      */
+      .ai-main {
+        position: relative;
+        min-height: 80vh;
+        padding: 3rem 1rem;
+        /* A swirling gradient background */
+        background: linear-gradient(
+          135deg,
+          rgba(245,129,30, 0.7) 0%, 
+          rgba(30,42,120, 0.7) 50%, 
+          rgba(245,129,30, 0.7) 100%
+        );
+        /* Animate background using a keyframe approach on background-position */
+        background-size: 400% 400%;
+        animation: gradientSwirl 10s ease infinite;
+        overflow: hidden;
+      }
+
+      @keyframes gradientSwirl {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      /* Some floating shapes */
+      .floating-shape {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.3;
+        pointer-events: none;
+        animation: floatUp 8s infinite ease-in-out alternate;
+      }
+      @keyframes floatUp {
+        0% { transform: translateY(0px) rotate(0deg); }
+        100% { transform: translateY(-60px) rotate(360deg); }
+      }
+      .shape1 {
+        width: 120px;
+        height: 120px;
+        background: var(--brand-blue);
+        top: 40%;
+        left: 10%;
+      }
+      .shape2 {
+        width: 150px;
+        height: 150px;
+        background: var(--brand-accent);
+        top: 60%;
+        left: 80%;
+        animation-duration: 6s; /* Different speed */
+      }
+      .shape3 {
+        width: 180px;
+        height: 180px;
+        background: #ffffff;
+        top: 20%;
+        left: 45%;
+        animation-duration: 9s; /* Another speed */
+      }
+
+      /* 
+        Hero-like container for AI features
+      */
+      .ai-content {
+        position: relative;
+        z-index: 1; /* Above floating shapes */
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+        color: #fff;
+      }
+      .ai-content h1 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      }
+      .ai-content p {
+        font-size: 1rem;
+        max-width: 700px;
+        margin: 0.5rem auto 2rem;
+        line-height: 1.6;
+        text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      }
+
+      /* 
+        Big futuristic "cards" or "buttons" to navigate to other pages
+      */
+      .ai-features {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-top: 2rem;
+        align-items: center;
+      }
+      @media(min-width: 768px) {
+        .ai-features {
+          flex-direction: row;
+          justify-content: center;
+        }
+      }
+
+      .ai-feature-btn {
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(8px);
+        border: 2px solid rgba(255,255,255,0.2);
+        border-radius: 12px;
+        padding: 2rem;
+        color: #fff;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: transform 0.4s, box-shadow 0.4s, background 0.4s;
+        width: 90%;
+        max-width: 300px;
+        text-align: center;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        position: relative;
+        overflow: hidden;
+      }
+      .ai-feature-btn:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        background: rgba(255,255,255,0.2);
+      }
+      .ai-feature-btn i {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        display: inline-block;
+      }
+
+      /*
+        ==================
+        FOOTER SECTION
+        (Same as other pages)
+        ==================
+      */
+      footer {
+        background: #fff;
+        border-top: 1px solid #eee;
+        padding: 1.5rem 1rem;
+      }
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .footer-container p {
+        color: #999;
+        font-size: 0.9rem;
+      }
+      .footer-links a {
+        margin: 0 0.5rem;
+        color: #999;
+        font-size: 0.9rem;
+      }
+      .footer-links a:hover {
+        color: var(--brand-blue);
+      }
+
+      /*
+        ==================
+        MODAL STYLES
+        (Same as other pages)
+        ==================
+      */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.55);
+        display: none; 
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+      .modal {
+        background: #fff;
+        color: #000;
+        width: 95%;
+        max-width: 450px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        position: relative;
+      }
+      .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        background: transparent;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        color: #999;
+      }
+      .modal-heading {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 1rem 0 0.5rem;
+      }
+      .modal-body {
+        padding: 1.5rem;
+      }
+      .modal-body label {
+        display: block;
+        margin: 0.8rem 0 0.4rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #000;
+      }
+      .modal-body input {
+        width: 100%;
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+      .forgot-password {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 1rem;
+        text-align: right;
+      }
+      .modal-footer-btn {
+        display: block;
+        width: 100%;
+        background: var(--brand-accent);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.6rem 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 0.95rem;
+        margin-top: 0.5rem;
+        text-align: center;
+      }
+      .modal-footer-btn:hover {
+        background: #e56a0f;
+      }
+      .or-separator {
+        text-align: center;
+        margin: 1rem 0;
+        font-size: 0.9rem;
+        color: #666;
+      }
+      .btn-google {
+        display: inline-block;
+        background: #db4437;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      .new-user-text {
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+      }
+      .new-user-text a {
+        color: var(--brand-accent);
+        font-weight: 600;
+        margin-left: 0.3rem;
+        text-decoration: none;
+      }
+      .new-user-text a:hover {
+        text-decoration: underline;
+      }
+      .register-mode label,
+      .register-mode select {
+        display: block;
+      }
+      .register-mode select {
+        width: 100%;
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER (Same as other pages) -->
+    <header>
+      <div class="header-container">
+        <div class="logo">
+          <a href="index.html">
+            <img src="logo.png" alt="Workwise Logo" />
+          </a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="for-vendors.html">For Vendors</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="contact-us.html">Contact Us</a></li>
+          </ul>
+        </nav>
+        <div class="auth-buttons">
+          <button class="btn-login" onclick="openModal('login')">Login</button>
+          <button class="btn-register" onclick="openModal('register')">Register</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- AI MAIN SECTION (Futuristic Design) -->
+    <section class="ai-main">
+      <!-- Floating Shapes (for decoration/animation) -->
+      <div class="floating-shape shape1"></div>
+      <div class="floating-shape shape2"></div>
+      <div class="floating-shape shape3"></div>
+
+      <div class="ai-content">
+        <h1>AI-Powered Tender Assistant</h1>
+        <p>
+          Experience next-generation procurement tools: Automate your BOQ processing, 
+          summarize multi-page tenders into quick insights, and clarify your doubts via 
+          our dynamic Q&A engine – all in one futuristic interface.
+        </p>
+
+        <!-- AI Feature Buttons (or "cards") -->
+        <div class="ai-features">
+          <!-- 1) Upload BOQ to generate structured RFQ -->
+          <div 
+            class="ai-feature-btn" 
+            onclick="window.location.href='uploadBOQ.html'"
+            title="Upload a BOQ to generate an RFQ with structured data fields"
+          >
+            <i class="fas fa-file-upload"></i>
+            <span>Upload BOQ & Generate RFQ</span>
+          </div>
+
+          <!-- 2) Summarize Tender Documents (200-1000 pages) -->
+          <div 
+            class="ai-feature-btn" 
+            onclick="window.location.href='summarizeTender.html'"
+            title="Summarize tender documents (200-1000 pages) into a 2-page summary"
+          >
+            <i class="fas fa-compress-alt"></i>
+            <span>Summarize Tender Docs</span>
+          </div>
+
+          <!-- 3) Q&A Feature Based on Uploaded Tender -->
+          <div 
+            class="ai-feature-btn" 
+            onclick="window.location.href='qaTender.html'"
+            title="Ask questions and get clarifications from the uploaded tender"
+          >
+            <i class="fas fa-comments"></i>
+            <span>Clarification Q&A</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER (Same as other pages) -->
+    <footer>
+      <div class="footer-container">
+        <p>© 2024 Workwise - All Rights Reserved |
+           Digital Partner 
+           <a href="https://www.indusnet.co.in/" target="_blank">Indus Net Technologies</a>
+        </p>
+        <div class="footer-links">
+          <a href="privacypolicy.html">Privacy Policy</a> |
+          <a href="terms-of-use.html">Terms of Use</a> |
+          <a href="https://www.linkedin.com/company/workwise11/" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- MODAL OVERLAY -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <script>
+      // Track login status in a simple variable (for demonstration).
+      // In a real application, you'd have proper authentication handling.
+      let isUserLoggedIn = false;
+
+      // ======== MODAL LOGIC (Same as other pages) ========
+      const overlay = document.getElementById('modalOverlay');
+
+      function openModal(mode) {
+        // mode can be 'login' or 'register'
+        overlay.style.display = 'flex';
+        overlay.innerHTML = generateModalHTML(mode);
+      }
+
+      function closeModal() {
+        overlay.style.display = 'none';
+        overlay.innerHTML = '';
+      }
+
+      function generateModalHTML(mode) {
+        if (mode === 'login') {
+          return `
+            <div class="modal">
+              <button class="close-modal" onclick="closeModal()">&times;</button>
+              <div class="modal-body">
+                <div class="modal-heading">Login</div>
+
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" placeholder="Enter your email" />
+
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter Password" />
+
+                <div class="forgot-password">
+                  <a href="#">Forgot Password?</a>
+                </div>
+
+                <button class="modal-footer-btn" onclick="submitLogin()">Login</button>
+
+                <div class="or-separator">OR</div>
+
+                <button class="btn-google">
+                  <i class="fab fa-google"></i>
+                  Login With Google
+                </button>
+
+                <div class="new-user-text">
+                  Are you a new user?
+                  <a href="#" onclick="openModal('register')">Register here</a>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          return `
+            <div class="modal">
+              <button class="close-modal" onclick="closeModal()">&times;</button>
+              <div class="modal-body register-mode">
+                <div class="modal-heading">Register</div>
+
+                <label for="regName">Contact Person Name</label>
+                <input type="text" id="regName" placeholder="e.g. Rahul Patil" />
+
+                <label for="regEmail">Work Email</label>
+                <input type="email" id="regEmail" placeholder="you@example.com" />
+
+                <label for="regOrg">Organization Name</label>
+                <input type="text" id="regOrg" placeholder="e.g. Workwise Pvt Ltd" />
+
+                <label for="regPhone">Phone No.</label>
+                <input type="tel" id="regPhone" placeholder="e.g. 9123456789" />
+
+                <label for="regType">Register As</label>
+                <select id="regType">
+                  <option value="">--Select--</option>
+                  <option value="buyer">Buyer</option>
+                  <option value="vendor">Vendor</option>
+                </select>
+
+                <button class="modal-footer-btn" onclick="submitRegister()">Register</button>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      function submitLogin() {
+        const email = document.getElementById('loginEmail').value;
+        const pwd = document.getElementById('loginPassword').value;
+        
+        if (email && pwd) {
+          alert("Login Attempt:\nEmail: " + email);
+          isUserLoggedIn = true;
+          closeModal();
+        } else {
+          alert("Please enter email and password.");
+        }
+      }
+
+      // Demo: Append user info to a CSV file (requires server endpoint "saveUser.php").
+      async function submitRegister() {
+        const name = document.getElementById('regName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const org = document.getElementById('regOrg').value.trim();
+        const phone = document.getElementById('regPhone').value.trim();
+        const type = document.getElementById('regType').value;
+
+        if (!name || !email || !org || !phone || !type) {
+          alert("Please fill out all fields.");
+          return;
+        }
+
+        const csvLine = `${name},${email},${org},${phone},${type}\n`;
+
+        try {
+          await fetch('saveUser.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'text/plain',
+            },
+            body: csvLine,
+          });
+
+          alert("Registration Successful. Account added to .csv file (demo).");
+          isUserLoggedIn = true;
+          closeModal();
+        } catch (error) {
+          alert("Error registering user. Please try again.");
+          console.error(error);
+        }
+      }
+    </script>
+  </body>
+</html>

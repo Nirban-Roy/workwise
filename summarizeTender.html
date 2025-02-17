@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Workwise | Summarize Tender</title>
+    
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- Font Awesome (for icons) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-..."
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      /* 
+        =========================================
+        GLOBAL / REUSABLE STYLES
+        =========================================
+      */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --text-black: #000;            /* Pure black for texts */
+        --brand-accent: #f5811e;       /* Orange, used for primary accent */
+        --brand-blue: #1E2A78;         /* Dark blue, used for secondary accent */
+      }
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #fff;
+        color: var(--text-black);
+        overflow-x: hidden; /* Prevent horizontal scroll if wide animations occur */
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+      }
+
+      /*
+        =========================================
+        HEADER & NAVIGATION (Same as other pages)
+        =========================================
+      */
+      header {
+        width: 100%;
+        background-color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.8rem 1rem;
+      }
+      .logo img {
+        width: 140px;
+        height: auto;
+      }
+      nav ul {
+        display: flex;
+        gap: 1.5rem;
+      }
+      nav li {
+        position: relative;
+      }
+      nav a {
+        font-weight: 500;
+        color: var(--text-black);
+        transition: color 0.3s, text-decoration 0.3s;
+      }
+      nav a:hover {
+        color: #feca57;
+        text-decoration: underline;
+      }
+      .auth-buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+      /* Login button (orange) */
+      .btn-login {
+        background: var(--brand-accent);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s;
+      }
+      .btn-login:hover {
+        background: #e56a0f;
+      }
+      /* Register button (dark blue) */
+      .btn-register {
+        background: var(--brand-blue);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s;
+      }
+      .btn-register:hover {
+        background: #111f5b;
+      }
+
+      /*
+        =========================================
+        MAIN CONTENT: SUMMARIZE TENDER
+        =========================================
+      */
+      .summarize-tender-section {
+        position: relative;
+        min-height: 80vh;
+        padding: 3rem 1rem;
+        /* Animated gradient background similar to other pages */
+        background: linear-gradient(
+          135deg, 
+          rgba(30,42,120,0.6), 
+          rgba(245,129,30,0.6)
+        );
+        background-size: 300% 300%;
+        animation: swirlBG 12s infinite ease-in-out;
+        overflow: hidden;
+      }
+      @keyframes swirlBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      /* Decorative floating shapes */
+      .floating-shape {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.25;
+        pointer-events: none;
+        animation: floatShape 8s infinite ease-in-out alternate;
+      }
+      @keyframes floatShape {
+        0%   { transform: translateY(0) scale(1); }
+        100% { transform: translateY(-50px) scale(1.1); }
+      }
+      .shape1 {
+        width: 100px; height: 100px;
+        background: var(--brand-blue);
+        top: 35%; left: 15%;
+      }
+      .shape2 {
+        width: 130px; height: 130px;
+        background: var(--brand-accent);
+        top: 60%; left: 70%;
+        animation-duration: 6s;
+      }
+      .shape3 {
+        width: 150px; height: 150px;
+        background: #ffffff;
+        top: 20%; left: 45%;
+        animation-duration: 10s;
+      }
+
+      /* Container with text + form/controls */
+      .summarize-tender-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: center;
+        color: #fff;
+      }
+      .summarize-header {
+        margin-bottom: 2rem;
+      }
+      .summarize-header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      }
+      .summarize-header p {
+        font-size: 1rem;
+        margin: 0.5rem auto 2rem;
+        max-width: 600px;
+        line-height: 1.6;
+        text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      }
+
+      /* Summarize form container */
+      .summarize-form {
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(8px);
+        border-radius: 12px;
+        padding: 2rem 1.5rem;
+        margin: 0 auto;
+        text-align: left;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        max-width: 600px;
+        color: #fff;
+      }
+      .summarize-form h2 {
+        font-size: 1.4rem;
+        margin-bottom: 1.2rem;
+        font-weight: 700;
+        text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      }
+      .form-group {
+        margin-bottom: 1.2rem;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 0.4rem;
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 0.7rem;
+        border-radius: 4px;
+        border: none;
+        outline: none;
+        font-size: 0.95rem;
+        color: var(--text-black);
+      }
+      .form-group input[type="file"] {
+        border: 1px solid #ccc;
+        background-color: #fff;
+      }
+
+      /* Summarize button */
+      .btn-summarize {
+        display: inline-block;
+        padding: 0.7rem 1.4rem;
+        background: var(--brand-accent);
+        color: #fff;
+        font-weight: 600;
+        font-size: 1rem;
+        border: none;
+        border-radius: 4px;
+        transition: background 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+        margin-top: 1rem;
+      }
+      .btn-summarize:hover {
+        background: #e56a0f;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      }
+
+      /* Summarized text area (optional) */
+      .summary-result {
+        margin-top: 2rem;
+        background: rgba(255,255,255,0.2);
+        border-radius: 8px;
+        padding: 1rem;
+        color: #fff;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      }
+
+      /*
+        =========================================
+        FOOTER (Same as other pages)
+        =========================================
+      */
+      footer {
+        background: #fff;
+        border-top: 1px solid #eee;
+        padding: 1.5rem 1rem;
+      }
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .footer-container p {
+        color: #999;
+        font-size: 0.9rem;
+      }
+      .footer-links a {
+        margin: 0 0.5rem;
+        color: #999;
+        font-size: 0.9rem;
+      }
+      .footer-links a:hover {
+        color: var(--brand-blue);
+      }
+
+      /*
+        ==================
+        MODAL STYLES
+        (Same as other pages)
+        ==================
+      */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.55);
+        display: none; 
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+      .modal {
+        background: #fff;
+        color: #000;
+        width: 95%;
+        max-width: 450px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        position: relative;
+      }
+      .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        background: transparent;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        color: #999;
+      }
+      .modal-heading {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 1rem 0 0.5rem;
+      }
+      .modal-body {
+        padding: 1.5rem;
+      }
+      .modal-body label {
+        display: block;
+        margin: 0.8rem 0 0.4rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #000;
+      }
+      .modal-body input {
+        width: 100%;
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+      .forgot-password {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 1rem;
+        text-align: right;
+      }
+      .modal-footer-btn {
+        display: block;
+        width: 100%;
+        background: var(--brand-accent); /* Keep orange for the main Login/Register call to action */
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.6rem 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 0.95rem;
+        margin-top: 0.5rem;
+        text-align: center;
+      }
+      .modal-footer-btn:hover {
+        background: #e56a0f;
+      }
+      .or-separator {
+        text-align: center;
+        margin: 1rem 0;
+        font-size: 0.9rem;
+        color: #666;
+      }
+      .btn-google {
+        display: inline-block;
+        background: #db4437;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      .new-user-text {
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+      }
+      .new-user-text a {
+        color: var(--brand-accent);
+        font-weight: 600;
+        margin-left: 0.3rem;
+        text-decoration: none;
+      }
+      .new-user-text a:hover {
+        text-decoration: underline;
+      }
+      .register-mode label,
+      .register-mode select {
+        display: block;
+      }
+      .register-mode select {
+        width: 100%;
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER (Same as other pages) -->
+    <header>
+      <div class="header-container">
+        <div class="logo">
+          <a href="index.html">
+            <img src="logo.png" alt="Workwise Logo" />
+          </a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="for-vendors.html">For Vendors</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="contact-us.html">Contact Us</a></li>
+          </ul>
+        </nav>
+        <div class="auth-buttons">
+          <button class="btn-login" onclick="openModal('login')">Login</button>
+          <button class="btn-register" onclick="openModal('register')">Register</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- SUMMARIZE TENDER MAIN SECTION -->
+    <section class="summarize-tender-section">
+      <!-- Floating shapes for futuristic style -->
+      <div class="floating-shape shape1"></div>
+      <div class="floating-shape shape2"></div>
+      <div class="floating-shape shape3"></div>
+
+      <div class="summarize-tender-inner">
+        <div class="summarize-header">
+          <h1>Summarize Tender Documents</h1>
+          <p>
+            Upload your large tender document (200-1000 pages) and let AI produce a concise, 
+            2-page summary to accelerate your review process.
+          </p>
+        </div>
+
+        <!-- Summarize form container -->
+        <div class="summarize-form">
+          <h2>Upload & Summarize</h2>
+          <form id="tenderSummarizeForm" onsubmit="handleTenderSummarize(event)">
+            <div class="form-group">
+              <label for="tenderFile">Tender Document (PDF, DOC, DOCX)</label>
+              <input type="file" id="tenderFile" accept=".pdf,.doc,.docx" required />
+            </div>
+            <button class="btn-summarize" type="submit">Generate Summary</button>
+          </form>
+
+          <!-- Placeholder for summarized text result -->
+          <div class="summary-result" id="summaryResult" style="display:none;">
+            <h3>AI Summary (2 Pages)</h3>
+            <p id="summaryText">
+              <!-- This is where the summary text will appear after generation -->
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER (Same as other pages) -->
+    <footer>
+      <div class="footer-container">
+        <p>© 2024 Workwise - All Rights Reserved |
+          Digital Partner 
+          <a href="https://www.indusnet.co.in/" target="_blank">Indus Net Technologies</a>
+        </p>
+        <div class="footer-links">
+          <a href="privacypolicy.html">Privacy Policy</a> |
+          <a href="terms-of-use.html">Terms of Use</a> |
+          <a href="https://www.linkedin.com/company/workwise11/" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- MODAL OVERLAY (Same from other pages) -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <script>
+      // Track login status in a simple variable (for demonstration).
+      let isUserLoggedIn = false;
+
+      // ======== MODAL LOGIC (Same as other pages) ========
+      const overlay = document.getElementById('modalOverlay');
+
+      function openModal(mode) {
+        overlay.style.display = 'flex';
+        overlay.innerHTML = generateModalHTML(mode);
+      }
+
+      function closeModal() {
+        overlay.style.display = 'none';
+        overlay.innerHTML = '';
+      }
+
+      function generateModalHTML(mode) {
+        if (mode === 'login') {
+          return `
+            <div class="modal">
+              <button class="close-modal" onclick="closeModal()">&times;</button>
+              <div class="modal-body">
+                <div class="modal-heading">Login</div>
+
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" placeholder="Enter your email" />
+
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter Password" />
+
+                <div class="forgot-password">
+                  <a href="#">Forgot Password?</a>
+                </div>
+
+                <button class="modal-footer-btn" onclick="submitLogin()">Login</button>
+
+                <div class="or-separator">OR</div>
+
+                <button class="btn-google">
+                  <i class="fab fa-google"></i>
+                  Login With Google
+                </button>
+
+                <div class="new-user-text">
+                  Are you a new user?
+                  <a href="#" onclick="openModal('register')">Register here</a>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          // register
+          return `
+            <div class="modal">
+              <button class="close-modal" onclick="closeModal()">&times;</button>
+              <div class="modal-body register-mode">
+                <div class="modal-heading">Register</div>
+
+                <label for="regName">Contact Person Name</label>
+                <input type="text" id="regName" placeholder="e.g. Rahul Patil" />
+
+                <label for="regEmail">Work Email</label>
+                <input type="email" id="regEmail" placeholder="you@example.com" />
+
+                <label for="regOrg">Organization Name</label>
+                <input type="text" id="regOrg" placeholder="e.g. Workwise Pvt Ltd" />
+
+                <label for="regPhone">Phone No.</label>
+                <input type="tel" id="regPhone" placeholder="e.g. 9123456789" />
+
+                <label for="regType">Register As</label>
+                <select id="regType">
+                  <option value="">--Select--</option>
+                  <option value="buyer">Buyer</option>
+                  <option value="vendor">Vendor</option>
+                </select>
+
+                <button class="modal-footer-btn" onclick="submitRegister()">Register</button>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      function submitLogin() {
+        const email = document.getElementById('loginEmail').value;
+        const pwd = document.getElementById('loginPassword').value;
+        
+        if (email && pwd) {
+          alert("Login Attempt:\nEmail: " + email);
+          isUserLoggedIn = true;
+          closeModal();
+        } else {
+          alert("Please enter email and password.");
+        }
+      }
+
+      async function submitRegister() {
+        const name = document.getElementById('regName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const org = document.getElementById('regOrg').value.trim();
+        const phone = document.getElementById('regPhone').value.trim();
+        const type = document.getElementById('regType').value;
+
+        if (!name || !email || !org || !phone || !type) {
+          alert("Please fill out all fields.");
+          return;
+        }
+
+        const csvLine = `${name},${email},${org},${phone},${type}\n`;
+
+        try {
+          await fetch('saveUser.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'text/plain',
+            },
+            body: csvLine,
+          });
+          alert("Registration Successful. Account added to .csv file (demo).");
+          isUserLoggedIn = true;
+          closeModal();
+        } catch (error) {
+          alert("Error registering user. Please try again.");
+          console.error(error);
+        }
+      }
+
+      // ======== Handle Summarize Form Submission (Demo) ========
+      function handleTenderSummarize(event) {
+        event.preventDefault();
+        
+        const fileInput = document.getElementById('tenderFile');
+        const tenderFile = fileInput.files[0];
+        if (!tenderFile) {
+          alert('Please select a tender document to summarize.');
+          return;
+        }
+
+        // For demonstration, we just display a mock summary
+        // In real usage, you'd send the file to a server/AI engine, then get a summary back
+        alert(`Tender Document Uploaded!\nFile: ${tenderFile.name}`);
+        
+        // Mock summary text
+        const mockSummary = `
+          <strong>Executive Summary:</strong> 
+          This tender covers the procurement of mechanical, electrical, and civil works 
+          for the XYZ project. The key deadlines are listed in Section 3, 
+          while technical specifications appear in Section 7. 
+          <br><br>
+          <strong>Key Highlights:</strong> 
+          - Approx. 100k sq. ft. built-up area 
+          - Environmental compliance guidelines 
+          - 24-month completion timeline 
+          <br><br>
+          <strong>Major Requirements:</strong> 
+          - Certified testing labs 
+          - Coordination with local authorities 
+          - Financial stability and proven track record 
+        `;
+
+        // Show the summary container
+        document.getElementById('summaryResult').style.display = 'block';
+        document.getElementById('summaryText').innerHTML = mockSummary;
+
+        // Reset the form if you like
+        //document.getElementById('tenderSummarizeForm').reset();
+      }
+    </script>
+  </body>
+</html>

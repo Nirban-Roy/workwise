@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Workwise | Create RFQ</title>
+    
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- Font Awesome (for icons) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-..."
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      /* 
+        =========================================
+        GLOBAL / REUSABLE STYLES
+        =========================================
+      */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --text-black: #000;         /* Pure black for texts */
+        --text-gray: #555;          /* Darker gray for main body text */
+        --text-muted: #999;         /* Lighter gray for footers, etc. */
+        --brand-accent: #f5811e;    /* Orange accent (Login, hero CTA, etc.) */
+        --brand-blue: #1e2a78;      /* Dark blue accent (Register, AI, etc.) */
+        --bg-light: #f9f9f9;        /* Light background shade */
+        --bg-gradient: linear-gradient(120deg, #f0f4ff 0%, #ffffff 100%);
+      }
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #fff;
+        color: var(--text-black);
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+      }
+
+      /*
+        =========================================
+        HEADER / NAVBAR
+        =========================================
+      */
+      header {
+        width: 100%;
+        background-color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.8rem 1rem;
+      }
+      .logo img {
+        width: 140px;
+        height: auto;
+      }
+      nav ul {
+        display: flex;
+        gap: 1.5rem;
+      }
+      nav li {
+        position: relative;
+      }
+      nav a {
+        font-weight: 500;
+        color: var(--text-black);
+        transition: color 0.3s, text-decoration 0.3s;
+      }
+      nav a:hover {
+        color: #feca57; /* hover color */
+        text-decoration: underline;
+      }
+      .auth-buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+      /* Login button (orange) */
+      .btn-login {
+        background: var(--brand-accent);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s;
+      }
+      .btn-login:hover {
+        background: #e56a0f;
+      }
+      /* Register button (dark blue) */
+      .btn-register {
+        background: var(--brand-blue);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s;
+      }
+      .btn-register:hover {
+        background: #111f5b;
+      }
+
+      /*
+        =========================================
+        MAIN CONTENT: CREATE RFQ SECTION
+        =========================================
+      */
+      .create-rfq-section {
+        /* Subtle gradient background */
+        background: var(--bg-gradient);
+        min-height: 80vh;
+        padding: 2.5rem 1rem;
+      }
+      .create-rfq-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* Back to Home button */
+      .back-button {
+        display: inline-flex;
+        align-items: center;
+        background: var(--brand-accent);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.6rem 1rem;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: background 0.3s, box-shadow 0.3s;
+        margin-bottom: 1rem;
+      }
+      .back-button i {
+        margin-right: 0.5rem;
+      }
+      .back-button:hover {
+        background: #e56a0f;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      }
+
+      /* Create RFQ page header text */
+      .create-rfq-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      .create-rfq-header h1 {
+        font-size: 2.2rem;
+        color: var(--brand-blue);
+        font-weight: 700;
+      }
+      .create-rfq-header p {
+        font-size: 1rem;
+        color: var(--text-gray);
+        margin-top: 0.5rem;
+      }
+
+      /* Form container card */
+      .create-rfq-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        max-width: 700px;
+        margin: 0 auto;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .create-rfq-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      }
+      .create-rfq-card h2 {
+        font-size: 1.4rem;
+        color: var(--brand-blue);
+        margin-bottom: 1rem;
+      }
+
+      /* Form elements styling */
+      .rfq-form-group {
+        margin-bottom: 1rem;
+      }
+      .rfq-form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--text-black);
+      }
+      .rfq-form-group input,
+      .rfq-form-group select,
+      .rfq-form-group textarea {
+        width: 100%;
+        font-size: 0.95rem;
+        padding: 0.7rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+        transition: border-color 0.3s;
+      }
+      .rfq-form-group input:focus,
+      .rfq-form-group select:focus,
+      .rfq-form-group textarea:focus {
+        border-color: var(--brand-accent);
+      }
+      .rfq-form-group textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      /* Create button */
+      .btn-create-rfq {
+        display: inline-block;
+        background: var(--brand-accent);
+        color: #fff;
+        padding: 0.7rem 1.4rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s, box-shadow 0.3s;
+      }
+      .btn-create-rfq:hover {
+        background: #e56a0f;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      }
+
+      /*
+        =========================================
+        FOOTER
+        =========================================
+      */
+      footer {
+        background: #fff;
+        border-top: 1px solid #eee;
+        padding: 1.5rem 1rem;
+        margin-top: 2rem;
+      }
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .footer-container p {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+      .footer-links a {
+        margin: 0 0.5rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+      .footer-links a:hover {
+        color: var(--brand-blue);
+      }
+
+      /*
+        =======================================
+        MODAL STYLES (Same from index.html / RFQ details)
+        =======================================
+      */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.55);
+        display: none; /* Hidden by default */
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+      .modal {
+        background: #fff;
+        color: #000;
+        width: 95%;
+        max-width: 450px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        position: relative;
+      }
+      .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        background: transparent;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        color: #999;
+      }
+      .modal-heading {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 1rem 0 0.5rem;
+      }
+      .modal-body {
+        padding: 1.5rem;
+      }
+      .modal-body label {
+        display: block;
+        margin: 0.8rem 0 0.4rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #000;
+      }
+      .modal-body input {
+        width: 100%;
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+      .forgot-password {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 1rem;
+        text-align: right;
+      }
+      .modal-footer-btn {
+        display: block;
+        width: 100%;
+        background: var(--brand-accent); /* Keep orange for the main Login/Register call to action */
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.6rem 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 0.95rem;
+        margin-top: 0.5rem;
+        text-align: center;
+      }
+      .modal-footer-btn:hover {
+        background: #e56a0f;
+      }
+      .or-separator {
+        text-align: center;
+        margin: 1rem 0;
+        font-size: 0.9rem;
+        color: #666;
+      }
+      .btn-google {
+        display: inline-block;
+        background: #db4437;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      .new-user-text {
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+      }
+      .new-user-text a {
+        color: var(--brand-accent);
+        font-weight: 600;
+        margin-left: 0.3rem;
+        text-decoration: none;
+      }
+      .new-user-text a:hover {
+        text-decoration: underline;
+      }
+      .register-mode label,
+      .register-mode select {
+        display: block;
+      }
+      .register-mode select {
+        width: 100%;
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- HEADER / NAVBAR -->
+    <header>
+      <div class="header-container">
+        <div class="logo">
+          <a href="index.html">
+            <!-- Replace with your actual logo file -->
+            <img src="logo.png" alt="Workwise Logo" />
+          </a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="for-vendors.html">For Vendors</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="contact-us.html">Contact Us</a></li>
+          </ul>
+        </nav>
+        <div class="auth-buttons">
+          <button class="btn-login" onclick="openModal('login')">Login</button>
+          <button class="btn-register" onclick="openModal('register')">Register</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CREATE RFQ SECTION -->
+    <section class="create-rfq-section">
+      <div class="create-rfq-inner">
+        
+        <!-- Back Button and RFQ Heading -->
+        <div class="create-rfq-header">
+          <button class="back-button" onclick="window.location.href='rfqManagement.html'">
+            <i class="fas fa-arrow-left"></i> Back to RFQ Management
+          </button>
+          <h1>Create RFQ</h1>
+          <p>Fill out the form below to create a new Request for Quotation.</p>
+        </div>
+        
+        <!-- Create RFQ Form Card -->
+        <div class="create-rfq-card">
+          <h2>RFQ Information</h2>
+          <form id="createRFQForm" onsubmit="handleCreateRFQ(event)">
+            <!-- Field: RFQ Title -->
+            <div class="rfq-form-group">
+              <label for="rfqTitle">RFQ Title</label>
+              <input type="text" id="rfqTitle" placeholder="e.g. Industrial Pump Procurement" required />
+            </div>
+            <!-- Field: Product Name -->
+            <div class="rfq-form-group">
+              <label for="productName">Product Name</label>
+              <input type="text" id="productName" placeholder="e.g. Centrifugal Pumps" required />
+            </div>
+            <!-- Field: Quantity -->
+            <div class="rfq-form-group">
+              <label for="quantity">Required Quantity</label>
+              <input type="number" id="quantity" placeholder="e.g. 50" min="1" required />
+            </div>
+            <!-- Field: Material/Specs -->
+            <div class="rfq-form-group">
+              <label for="material">Material / Specs</label>
+              <input type="text" id="material" placeholder="e.g. Stainless Steel, 200 GPM flow rate" />
+            </div>
+            <!-- Field: Additional Details -->
+            <div class="rfq-form-group">
+              <label for="additionalDetails">Additional Details</label>
+              <textarea id="additionalDetails" placeholder="Any special standards, documentation requirements, etc."></textarea>
+            </div>
+            <!-- Field: Closing Date -->
+            <div class="rfq-form-group">
+              <label for="closingDate">Closing Date</label>
+              <input type="date" id="closingDate" required />
+            </div>
+            <!-- Submit Button -->
+            <button class="btn-create-rfq" type="submit">
+              Create RFQ
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-container">
+        <p>
+          © 2024 Workwise - All Rights Reserved |
+          Digital Partner
+          <a href="https://www.indusnet.co.in/" target="_blank">Indus Net Technologies</a>
+        </p>
+        <div class="footer-links">
+          <a href="privacypolicy.html">Privacy Policy</a> |
+          <a href="terms-of-use.html">Terms of Use</a> |
+          <a href="https://www.linkedin.com/company/workwise11/" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- MODAL OVERLAY -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <script>
+      // Track login status in a simple variable (for demonstration).
+      // In a real application, you'd have proper authentication handling.
+      let isUserLoggedIn = false;
+
+      // ======== MODAL LOGIC (Same from index.html) ========
+      const overlay = document.getElementById('modalOverlay');
+
+      function openModal(mode) {
+        // mode can be 'login' or 'register'
+        overlay.style.display = 'flex';
+        overlay.innerHTML = generateModalHTML(mode);
+      }
+
+      function closeModal() {
+        overlay.style.display = 'none';
+        overlay.innerHTML = '';
+      }
+
+      function generateModalHTML(mode) {
+        if (mode === 'login') {
+          return `
+            <div class="modal">
+              <button class="close-modal" onclick="closeModal()">&times;</button>
+              <div class="modal-body">
+                <div class="modal-heading">Login</div>
+
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" placeholder="Enter your email" />
+
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter Password" />
+
+                <div class="forgot-password">
+                  <a href="#">Forgot Password?</a>
+                </div>
+
+                <button class="modal-footer-btn" onclick="submitLogin()">Login</button>
+
+                <div class="or-separator">OR</div>
+
+                <button class="btn-google">
+                  <i class="fab fa-google"></i>
+                  Login With Google
+                </button>
+
+                <div class="new-user-text">
+                  Are you a new user?
+                  <a href="#" onclick="openModal('register')">Register here</a>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          // register
+          return `
+            <div class="modal">
+              <button class="close-modal" onclick="closeModal()">&times;</button>
+              <div class="modal-body register-mode">
+                <div class="modal-heading">Register</div>
+
+                <label for="regName">Contact Person Name</label>
+                <input type="text" id="regName" placeholder="e.g. Rahul Patil" />
+
+                <label for="regEmail">Work Email</label>
+                <input type="email" id="regEmail" placeholder="you@example.com" />
+
+                <label for="regOrg">Organization Name</label>
+                <input type="text" id="regOrg" placeholder="e.g. Workwise Pvt Ltd" />
+
+                <label for="regPhone">Phone No.</label>
+                <input type="tel" id="regPhone" placeholder="e.g. 9123456789" />
+
+                <label for="regType">Register As</label>
+                <select id="regType">
+                  <option value="">--Select--</option>
+                  <option value="buyer">Buyer</option>
+                  <option value="vendor">Vendor</option>
+                </select>
+
+                <button class="modal-footer-btn" onclick="submitRegister()">Register</button>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      function submitLogin() {
+        const email = document.getElementById('loginEmail').value;
+        const pwd = document.getElementById('loginPassword').value;
+        
+        // Very basic check just for demonstration:
+        if (email && pwd) {
+          alert("Login Attempt:\nEmail: " + email);
+          isUserLoggedIn = true;
+          closeModal();
+        } else {
+          alert("Please enter email and password.");
+        }
+      }
+
+      // Demo: Append user info to a CSV file (requires server endpoint "saveUser.php").
+      async function submitRegister() {
+        const name = document.getElementById('regName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const org = document.getElementById('regOrg').value.trim();
+        const phone = document.getElementById('regPhone').value.trim();
+        const type = document.getElementById('regType').value;
+
+        if (!name || !email || !org || !phone || !type) {
+          alert("Please fill out all fields.");
+          return;
+        }
+
+        // Create a CSV line (simple approach)
+        const csvLine = `${name},${email},${org},${phone},${type}\n`;
+
+        try {
+          // Here we simulate a request to a server that appends to a CSV file
+          // In a real scenario, you'd set up a server route to handle this.
+          await fetch('saveUser.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'text/plain',
+            },
+            body: csvLine,
+          });
+
+          alert("Registration Successful. Account added to .csv file (demo).");
+          isUserLoggedIn = true; // Mark user as logged in
+          closeModal();
+        } catch (error) {
+          alert("Error registering user. Please try again.");
+          console.error(error);
+        }
+      }
+
+      // Handle the form submission for "Create RFQ"
+      function handleCreateRFQ(event) {
+        event.preventDefault();
+        // In a real app, gather data, validate, and send to server
+        const title = document.getElementById('rfqTitle').value.trim();
+        const product = document.getElementById('productName').value.trim();
+        const qty = document.getElementById('quantity').value.trim();
+        const material = document.getElementById('material').value.trim();
+        const details = document.getElementById('additionalDetails').value.trim();
+        const closingDate = document.getElementById('closingDate').value;
+
+        // Simple demonstration alert
+        alert(
+          `RFQ Created!\n\nTitle: ${title}\nProduct: ${product}\nQuantity: ${qty}\nMaterial/Specs: ${material}\nAdditional Details: ${details}\nClosing Date: ${closingDate}`
+        );
+        // Reset form or redirect as needed
+        document.getElementById('createRFQForm').reset();
+      }
+    </script>
+  </body>
+</html>

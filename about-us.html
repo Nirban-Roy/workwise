@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Workwise | About Us</title>
+    
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- Font Awesome (for AI icon) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-..."
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      /* 
+        ========================
+        GLOBAL / REUSABLE STYLES
+        (Same look as your index.html)
+        ========================
+      */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --text-black: #000;          /* Pure black for texts */
+        --brand-accent: #f5811e;     /* Orange accent color */
+        --brand-blue: #1E2A78;       /* Dark blue, used for Register, AI button, etc. */
+      }
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #fff;
+        color: var(--text-black); /* Use pure black for text */
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+      }
+
+      /*
+        ===========================
+        HEADER & NAVIGATION
+        ===========================
+      */
+      header {
+        width: 100%;
+        background-color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.8rem 1rem;
+      }
+      .logo img {
+        width: 140px; /* adjust as needed */
+        height: auto;
+      }
+      nav ul {
+        display: flex;
+        gap: 1.5rem;
+      }
+      nav li {
+        position: relative;
+      }
+      nav a {
+        font-weight: 500;
+        color: var(--text-black);
+        transition: color 0.3s, text-decoration 0.3s;
+      }
+      nav a:hover {
+        color: #feca57; /* hover yellow */
+        text-decoration: underline;
+      }
+      .auth-buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+      /* Login button (orange) */
+      .btn-login {
+        background: var(--brand-accent);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s;
+      }
+      .btn-login:hover {
+        background: #e56a0f;
+      }
+      /* Register button (dark blue) */
+      .btn-register {
+        background: var(--brand-blue);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s;
+      }
+      .btn-register:hover {
+        background: #111f5b;
+      }
+
+      /*
+        =========================
+        BANNER / BREADCRUMB
+        =========================
+      */
+      .page-banner {
+        width: 100%;
+        /* Replace with your own background image */
+        background: url("https://api.letsworkwise.com/banner_image/1722514602793-9572cf56-4f0b-498b-8154-b1eabcc126c3.png") center/cover no-repeat;
+        min-height: 300px;
+        position: relative;
+      }
+      .page-banner::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        right: 0; bottom: 0;
+        background: rgba(0,0,0,0.4);
+      }
+      .banner-content {
+        position: relative;
+        z-index: 1;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1.5rem;
+        color: #fff;
+      }
+      .breadcrumb {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+      .breadcrumb a {
+        color: #feca57; /* breadcrumb link highlight */
+      }
+      .banner-title {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-top: 1rem;
+      }
+
+      /*
+        ==================
+        ABOUT US SECTION
+        ==================
+      */
+      .about-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 1rem;
+      }
+      .about-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        position: relative;
+      }
+      .about-description {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+      }
+
+      /* Optional large text background "ABOUT" behind the heading (if desired) */
+      .about-section-heading {
+        position: relative;
+      }
+      .about-section-heading::before {
+        content: "About";
+        position: absolute;
+        font-size: 6rem;
+        font-weight: 700;
+        color: rgba(0,0,0,0.05);
+        top: -50px;
+        left: 0;
+        z-index: -1;
+      }
+
+      /*
+        =====================
+        OUR VISION SECTION
+        =====================
+      */
+      .vision-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        padding: 3rem 1rem;
+        align-items: center;
+      }
+      .vision-content {
+        flex: 1 1 500px;
+      }
+      .vision-content h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+      .vision-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+      .vision-content ul {
+        margin-top: 1rem;
+      }
+      .vision-content li {
+        margin-bottom: 0.7rem;
+      }
+      .vision-image {
+        flex: 1 1 400px;
+        display: flex;
+        justify-content: center;
+      }
+      .vision-image img {
+        max-width: 400px;
+        border-radius: 4px;
+        width: 100%;
+      }
+
+      /*
+        =====================
+        OUR MISSION SECTION
+        =====================
+      */
+      .mission-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        padding: 3rem 1rem;
+        align-items: center;
+        flex-direction: row-reverse; /* image on left, text on right? or vice versa */
+      }
+      .mission-content {
+        flex: 1 1 500px;
+      }
+      .mission-content h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+      .mission-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+      .mission-content ul {
+        margin-top: 1rem;
+      }
+      .mission-content li {
+        margin-bottom: 0.7rem;
+      }
+      .mission-image {
+        flex: 1 1 400px;
+        display: flex;
+        justify-content: center;
+      }
+      .mission-image img {
+        max-width: 400px;
+        border-radius: 4px;
+        width: 100%;
+      }
+
+      /*
+        ======================
+        TEAM SECTION
+        ======================
+      */
+      .team-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 1rem;
+        text-align: center;
+      }
+      .team-section h2 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+      }
+      .team-members {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 2rem;
+        justify-items: center;
+      }
+      .team-card {
+        width: 200px;
+        background: #f9f9f9;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        padding: 1rem;
+        text-align: center;
+      }
+      .team-card img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+      }
+      .team-member-name {
+        font-weight: 600;
+      }
+      .team-member-position {
+        font-size: 0.9rem;
+        color: #555;
+        margin-bottom: 0.5rem;
+      }
+
+      /*
+        ==================
+        FOOTER SECTION
+        ==================
+      */
+      footer {
+        background: #fff;
+        border-top: 1px solid #eee;
+        padding: 1.5rem 1rem;
+      }
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .footer-container p {
+        color: #999;
+        font-size: 0.9rem;
+      }
+      .footer-links a {
+        margin: 0 0.5rem;
+        color: #999;
+        font-size: 0.9rem;
+      }
+      .footer-links a:hover {
+        color: var(--brand-blue);
+      }
+
+      /*
+        =======================================
+        BOTTOM-RIGHT BUTTON TO AI.html (with icon)
+        =======================================
+      */
+      /* Use dark blue for AI button */
+      .ai-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--brand-blue);
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        padding: 0.8rem 1.4rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        z-index: 999;
+        transition: background 0.3s;
+      }
+      .ai-btn i {
+        margin-right: 6px;
+      }
+      .ai-btn:hover {
+        background: #111f5b;
+      }
+
+      /*
+        ==================
+        MODAL STYLES
+        (Login/Register)
+        ==================
+      */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.55);
+        display: none; /* Hidden by default */
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+      .modal {
+        background: #fff;
+        color: #000;
+        width: 95%;
+        max-width: 450px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        position: relative;
+      }
+      .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        background: transparent;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        color: #999;
+      }
+      .modal-heading {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 1rem 0 0.5rem;
+      }
+      .modal-body {
+        padding: 1.5rem;
+      }
+      .modal-body label {
+        display: block;
+        margin: 0.8rem 0 0.4rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #000;
+      }
+      .modal-body input {
+        width: 100%;
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+      .forgot-password {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 1rem;
+        text-align: right;
+      }
+      .modal-footer-btn {
+        display: block;
+        width: 100%;
+        background: var(--brand-accent);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.6rem 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 0.95rem;
+        margin-top: 0.5rem;
+        text-align: center;
+      }
+      .modal-footer-btn:hover {
+        background: #e56a0f;
+      }
+      .or-separator {
+        text-align: center;
+        margin: 1rem 0;
+        font-size: 0.9rem;
+        color: #666;
+      }
+      .btn-google {
+        display: inline-block;
+        background: #db4437;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      .new-user-text {
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+      }
+      .new-user-text a {
+        color: var(--brand-accent);
+        font-weight: 600;
+        margin-left: 0.3rem;
+        text-decoration: none;
+      }
+      .new-user-text a:hover {
+        text-decoration: underline;
+      }
+      .register-mode label,
+      .register-mode select {
+        display: block;
+      }
+      .register-mode select {
+        width: 100%;
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <!-- HEADER -->
+    <header>
+      <div class="header-container">
+        <div class="logo">
+          <a href="index.html">
+            <img src="logo.png" alt="Workwise Logo" />
+          </a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="for-vendors.html">For Vendors</a></li>
+            <li><a href="about-us.html" style="color: var(--brand-accent);">About Us</a></li>
+            <li><a href="contact-us.html">Contact Us</a></li>
+          </ul>
+        </nav>
+        <div class="auth-buttons">
+          <button class="btn-login" onclick="openModal('login')">Login</button>
+          <button class="btn-register" onclick="openModal('register')">Register</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- PAGE BANNER -->
+    <section class="page-banner">
+      <div class="banner-content">
+        <div class="breadcrumb">
+          <a href="index.html">Home</a> / About Us
+        </div>
+        <h1 class="banner-title">About Us</h1>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about-section">
+      <div class="about-section-heading">
+        <h2 class="about-title">About Us</h2>
+      </div>
+      <p class="about-description">
+        Growing up, we witnessed firsthand the challenges faced by our families 
+        in the industrial sector. From <strong>inefficiencies in procurement processes</strong> 
+        to on-site frauds to the constant struggle of finding reliable vendors, 
+        these pain points were a daily reality. Inspired by these experiences, 
+        and driven by a passion to make a difference, we embarked on a mission 
+        to transform the industry.
+      </p>
+      <p class="about-description">
+        Workwise brings together over <strong>four decades of rich experience</strong> 
+        with the innovative energy of young talent from IIT and VIT. This unique blend 
+        of expertise and fresh perspectives allows us to create MAGIC.
+      </p>
+      <p class="about-description">
+        Whether you’re a buyer seeking reliable vendors or a vendor looking to expand 
+        your reach, Workwise is here to support you every step of the way, 
+        and become <strong>your growth partner.</strong>
+      </p>
+    </section>
+
+    <!-- OUR VISION SECTION -->
+    <section class="vision-section">
+      <div class="vision-content">
+        <h2>Our Vision</h2>
+        <p>
+          <strong>Building the Future of B2B Procurement</strong>
+        </p>
+        <p>
+          At Workwise, our vision is to empower the growth of all stakeholders 
+          in the Indian heavy industry by revolutionising the way they work together. 
+          We aim to bridge the gaps in technical, financial, operational, 
+          and market access challenges that hinder the industry’s progress.
+        </p>
+        <p>
+          By starting with a solution for contractors and vendors, 
+          we are committed to making procurement cheaper, faster, and more efficient. 
+          As a growth partner, we envision a future where:
+        </p>
+        <ul>
+          <li>Clients, contractors, and suppliers collaborate seamlessly</li>
+          <li>Procurement is a strategic advantage, not a roadblock</li>
+          <li>Innovation and efficiency drive industry growth</li>
+        </ul>
+      </div>
+      <div class="vision-image">
+        <!-- Replace with your own image -->
+        <img src="teamwork.jpg" alt="Teamwork Image" />
+      </div>
+    </section>
+
+    <!-- OUR MISSION SECTION -->
+    <section class="mission-section">
+      <div class="mission-image">
+        <!-- Replace with your own image -->
+        <img src="business-meeting.jpg" alt="Business Meeting Image" />
+      </div>
+      <div class="mission-content">
+        <h2>Our Mission</h2>
+        <p>
+          <strong>At Workwise, our mission is twofold</strong>
+        </p>
+        <p><em>Empowering Contractors/Clients</em></p>
+        <ul>
+          <li>Save 5% on procurement costs, to result in minimum 20% extra profit</li>
+          <li>Streamline procurement processes, freeing up 90% of time for strategic activities</li>
+        </ul>
+        <p><em>Empowering Subcontractors/Vendors</em></p>
+        <ul>
+          <li>Grow business by 20%, expanding their reach and opportunities</li>
+          <li>Connect with contractors seamlessly, ensuring a steady pipeline of orders</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- TEAM SECTION -->
+    <section class="team-section">
+      <h2>Meet Our Team</h2>
+      <div class="team-members">
+        <!-- Replace with actual team photos and info -->
+        <div class="team-card">
+          <img src="assets/images/team/member1.jpg" alt="Team Member 1" />
+          <h3 class="team-member-name">John Doe</h3>
+          <p class="team-member-position">Co-Founder & CTO</p>
+          <p>Tech visionary leading our platform development.</p>
+        </div>
+        <div class="team-card">
+          <img src="assets/images/team/member2.jpg" alt="Team Member 2" />
+          <h3 class="team-member-name">Jane Smith</h3>
+          <p class="team-member-position">Co-Founder & CEO</p>
+          <p>Business strategist ensuring steady growth.</p>
+        </div>
+        <div class="team-card">
+          <img src="assets/images/team/member3.jpg" alt="Team Member 3" />
+          <h3 class="team-member-name">Rahul Patil</h3>
+          <p class="team-member-position">Vendor Success Manager</p>
+          <p>Dedicated to helping vendors thrive on our platform.</p>
+        </div>
+        <div class="team-card">
+          <img src="assets/images/team/member4.jpg" alt="Team Member 4" />
+          <h3 class="team-member-name">Priya Sharma</h3>
+          <p class="team-member-position">Marketing Head</p>
+          <p>Spreading the word and driving brand awareness.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-container">
+        <p>© 2024 Workwise - All Rights Reserved |
+           Digital Partner 
+           <a href="https://www.indusnet.co.in/" target="_blank">Indus Net Technologies</a>
+        </p>
+        <div class="footer-links">
+          <a href="privacypolicy.html">Privacy Policy</a> |
+          <a href="terms-of-use.html">Terms of Use</a> |
+          <a href="https://www.linkedin.com/company/workwise11/" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- AI BUTTON (ICON) -->
+    <button class="ai-btn" onclick="window.location.href='AI.html'">
+      <i class="fas fa-brain"></i> AI
+    </button>
+
+    <!-- MODAL OVERLAY -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <script>
+      // ======== MODAL LOGIC ========
+      const overlay = document.getElementById('modalOverlay');
+
+      function openModal(mode) {
+        // mode can be 'login' or 'register'
+        overlay.style.display = 'flex';
+        overlay.innerHTML = generateModalHTML(mode);
+      }
+
+      function closeModal() {
+        overlay.style.display = 'none';
+        overlay.innerHTML = '';
+      }
+
+      function generateModalHTML(mode) {
+        if(mode === 'login') {
+          return `
+            <div class="modal">
+              <button class="close-modal" onclick="closeModal()">&times;</button>
+              <div class="modal-body">
+                <div class="modal-heading">Login</div>
+
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" placeholder="Enter your email" />
+
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter Password" />
+
+                <div class="forgot-password">
+                  <a href="#">Forgot Password?</a>
+                </div>
+
+                <button class="modal-footer-btn" onclick="submitLogin()">Login</button>
+
+                <div class="or-separator">OR</div>
+
+                <button class="btn-google">
+                  <i class="fab fa-google"></i>
+                  Login With Google
+                </button>
+
+                <div class="new-user-text">
+                  Are you a new user?
+                  <a href="#" onclick="openModal('register')">Register here</a>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          // register
+          return `
+            <div class="modal">
+              <button class="close-modal" onclick="closeModal()">&times;</button>
+              <div class="modal-body register-mode">
+                <div class="modal-heading">Register</div>
+
+                <label>Contact Person Name</label>
+                <input type="text" placeholder="e.g. Rahul Patil" />
+
+                <label>Work Email</label>
+                <input type="email" placeholder="you@example.com" />
+
+                <label>Organization Name</label>
+                <input type="text" placeholder="e.g. Workwise Pvt Ltd" />
+
+                <label>Phone No.</label>
+                <input type="tel" placeholder="e.g. 9123456789" />
+
+                <label>Register As</label>
+                <select>
+                  <option value="">--Select--</option>
+                  <option value="buyer">Buyer</option>
+                  <option value="vendor">Vendor</option>
+                </select>
+
+                <button class="modal-footer-btn" onclick="submitRegister()">Register</button>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      function submitLogin() {
+        const email = document.getElementById('loginEmail').value;
+        const pwd = document.getElementById('loginPassword').value;
+        alert("Login Attempt:\nEmail: " + email + "\nPassword: " + pwd);
+        closeModal();
+      }
+
+      function submitRegister() {
+        alert("Registration Attempted (Demo)!");
+        closeModal();
+      }
+    </script>
+  </body>
+</html>
